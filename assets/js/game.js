@@ -14,8 +14,13 @@ introFunction();
 function introFunction() {
     if (j > 0) {
         j = 0;
-        smallMainContainer.appendChild(multiButtonElement);
+        multiButtonElement = document.createElement("button");
+        multiButtonElement.textContent = multiButtonElement.getAttribute("data-start");
+        mainSectionContainer.appendChild(multiButtonElement);
+        multiButtonElement.addEventListener("click", startGame)
     }
+    currentTime = 60;
+    timerELement.textContent = currentTime;
     bigMainContainer.textContent = "Welcome to the JavaScript Quiz!";
     smallMainContainer.textContent = "Complete all questions before the timer runs out! Wrong answers take 15 seconds off the timer. Try to complete the quiz with the most time remaining!";
     multiButtonElement.textContent= multiButtonElement.getAttribute("data-start")
@@ -30,19 +35,18 @@ function timerFunction() {
         currentTime--;
         if (currentTime < 0) {
             currentTime = 0
+            timerELement.textContent = currentTime;
             clearInterval(time);
             endGame();
         }
         if (currentTime === 0) {
             clearInterval(time);
-            console.log("Time up")
             endGame();
         }
     },1000);
 };
 
 function renderQuestions() {
-    console.log(j);
     if (j === 0){
         mainSectionContainer.removeChild(multiButtonElement);
     }
@@ -62,7 +66,6 @@ function renderQuestions() {
     var box3 = document.createElement("section");
 
     var answerArray = [box0,box1,box2,box3]
-    console.log(answerArray)
     for (let i = 0; i < answerArray.length; i++) {
         if (correctAnswer == i){
             answerArray[i].setAttribute("data-correct", "correct");
@@ -82,37 +85,37 @@ function renderQuestions() {
 }
 
 function answerQuestions () {
-    smallMainContainer.addEventListener("click", function (event) {
-        event.stopImmediatePropagation();
-        console.log(event)
-        var yourGuess = event.target
-        var yourGuessAttribute = yourGuess.getAttribute("data-correct");
-        console.log(yourGuess.getAttribute("data-correct"))
-        if (yourGuess !== "section") {
-            answerQuestions();
-        } 
-        if (yourGuessAttribute === "correct") {
-            console.log("You are correct");
-            j++;
-            if (j === 5) {
-                    endGame();
-            } else {
-            renderQuestions();   
-            }      
-        } else {
-            console.log("Wrong answer!");
-            currentTime = currentTime - 15;
-            j++;
-            if (j === 5) {
-                endGame();
-            } else {
-            renderQuestions();   
-            }  
-        }
-    })
+    smallMainContainer.addEventListener("click", handleAnswer)
 }
 
+function handleAnswer (event) {
+    event.stopImmediatePropagation();
+    var yourGuess = event.target
+    var yourGuessAttribute = yourGuess.getAttribute("data-correct");
+    if (yourGuess !== "section") {
+        answerQuestions();
+    } 
+    if (yourGuessAttribute === "correct") {
+        j++;
+        if (j === 5) {
+                endGame();
+        } else {
+        renderQuestions();   
+        }      
+    } else {
+        currentTime = currentTime - 15;
+        j++;
+        if (j === 5) {
+            endGame();
+        } else {
+        renderQuestions();   
+        }  
+    }
+}
+
+
 function endGame() {
+    smallMainContainer.removeEventListener("click", handleAnswer);
     if (currentTime > 0) {
         clearInterval(time);
         score = currentTime
@@ -124,6 +127,8 @@ function endGame() {
         smallMainContainer.appendChild(submitButton);
         submitButton.textContent = multiButtonElement.getAttribute("data-submit");
         submitButton.addEventListener("click", function (){
+            currentTime = 60;
+            timerELement.textContent = currentTime;
             var initials = initialsInput.value
             var highscores = {
                 initials: initials,
@@ -134,8 +139,14 @@ function endGame() {
         })
     }
     if (currentTime === 0) {
-        bigMainContainer.textContent = "Better luck next time!"
-        smallMainContainer.textContent = ""
+        currentTime = 0;
+        timerELement.textContent = currentTime;
+        bigMainContainer.textContent = "Better luck next time!";
+        smallMainContainer.textContent = "";
+        var playAgainButton = document.createElement("button")
+        playAgainButton.textContent = "Play Again!"
+        smallMainContainer.appendChild(playAgainButton);
+        playAgainButton.addEventListener("click", introFunction)
     }
 }
 
