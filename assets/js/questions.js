@@ -1,3 +1,5 @@
+// This js file contains all of the question objects. Having this separate will reduce the size of the script.js file
+// The questions are housed as an array ofobjects. This allows me to iterate through the questions in a for loop.
 var questions = [
     {
         question: "The method used to prevent an event from bubbling up to it's parents is...?",

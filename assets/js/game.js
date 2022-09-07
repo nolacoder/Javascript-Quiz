@@ -11,6 +11,7 @@ var score
 
 introFunction();
 
+// Sets up the page on first load and after the quiz is complete
 function introFunction() {
     if (j > 0) {
         j = 0;
@@ -26,9 +27,10 @@ function introFunction() {
     multiButtonElement.textContent= multiButtonElement.getAttribute("data-start")
 }
 
+// Clicking the start button will begin the game
 multiButtonElement.addEventListener("click", startGame);
 
-
+// This keeps track of time 
 function timerFunction() {
     time = setInterval(function (){
         timerELement.textContent = currentTime
@@ -46,6 +48,7 @@ function timerFunction() {
     },1000);
 };
 
+// This function handles locating question properties and displaying them on the screen
 function renderQuestions() {
     if (j === 0){
         mainSectionContainer.removeChild(multiButtonElement);
@@ -84,10 +87,12 @@ function renderQuestions() {
 
 }
 
+// This begins the porcess handling an answer click
 function answerQuestions () {
     smallMainContainer.addEventListener("click", handleAnswer)
 }
 
+// This is the bulk of the answer click handling process
 function handleAnswer (event) {
     event.stopImmediatePropagation();
     var yourGuess = event.target
@@ -113,7 +118,7 @@ function handleAnswer (event) {
     }
 }
 
-
+// This ends the game and allows you to enter your initials
 function endGame() {
     smallMainContainer.removeEventListener("click", handleAnswer);
     if (currentTime > 0) {
@@ -150,26 +155,9 @@ function endGame() {
     }
 }
 
+// This is the flow of the quiz
 function startGame () {
     timerFunction ();
     renderQuestions();
     answerQuestions();
 }
-
-// Quiz init
-    // Timer
-    // Questions
-        // will be objects
-        // can't be repeated
-    // Progession (click)
-    // Win/Lose
-
-// Show Final Score
-    // Allow initials entry
-
-// Store score as objects in a local storage array
-
-// Display highscores
-    //Display local storage items
-        // must sort array by score
-    // Allow to play again
