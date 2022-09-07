@@ -12,6 +12,10 @@ var score
 introFunction();
 
 function introFunction() {
+    if (j > 0) {
+        j = 0;
+        smallMainContainer.appendChild(multiButtonElement);
+    }
     bigMainContainer.textContent = "Welcome to the JavaScript Quiz!";
     smallMainContainer.textContent = "Complete all questions before the timer runs out! Wrong answers take 15 seconds off the timer. Try to complete the quiz with the most time remaining!";
     multiButtonElement.textContent= multiButtonElement.getAttribute("data-start")
@@ -26,6 +30,7 @@ function timerFunction() {
         currentTime--;
         if (currentTime < 0) {
             currentTime = 0
+            clearInterval(time);
             endGame();
         }
         if (currentTime === 0) {
@@ -109,10 +114,24 @@ function answerQuestions () {
 
 function endGame() {
     if (currentTime > 0) {
+        clearInterval(time);
         score = currentTime
         bigMainContainer.textContent = "Congratulations! Your scored " + score + " !";
         smallMainContainer.textContent = "Enter your initials!"
-        smallMainContainer.appendChild(multiButtonElement);
+        var initialsInput = document.createElement("input");
+        var submitButton = document.createElement("button");
+        smallMainContainer.appendChild(initialsInput);
+        smallMainContainer.appendChild(submitButton);
+        submitButton.textContent = multiButtonElement.getAttribute("data-submit");
+        submitButton.addEventListener("click", function (){
+            var initials = initialsInput.value
+            var highscores = {
+                initials: initials,
+                score: score,
+            }
+            localStorage.setItem("highscore", JSON.stringify(highscores));
+            introFunction();
+        })
     }
     if (currentTime === 0) {
         bigMainContainer.textContent = "Better luck next time!"
