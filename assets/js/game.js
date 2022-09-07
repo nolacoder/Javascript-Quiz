@@ -6,6 +6,7 @@ var timerELement = document.getElementById("timer")
 var currentTime = 60;
 var correctAnswer
 var j = 0
+var score
 // Greeting init
 
 introFunction();
@@ -23,14 +24,20 @@ function timerFunction() {
     time = setInterval(function (){
         timerELement.textContent = currentTime
         currentTime--;
+        if (currentTime < 0) {
+            currentTime = 0
+            endGame();
+        }
         if (currentTime === 0) {
             clearInterval(time);
+            console.log("Time up")
             endGame();
         }
     },1000);
 };
 
 function renderQuestions() {
+    console.log(j);
     if (j === 0){
         mainSectionContainer.removeChild(multiButtonElement);
     }
@@ -71,6 +78,7 @@ function renderQuestions() {
 
 function answerQuestions () {
     smallMainContainer.addEventListener("click", function (event) {
+        event.stopImmediatePropagation();
         console.log(event)
         var yourGuess = event.target
         var yourGuessAttribute = yourGuess.getAttribute("data-correct");
@@ -80,20 +88,36 @@ function answerQuestions () {
         } 
         if (yourGuessAttribute === "correct") {
             console.log("You are correct");
-
+            j++;
+            if (j === 5) {
+                    endGame();
+            } else {
+            renderQuestions();   
+            }      
         } else {
             console.log("Wrong answer!");
             currentTime = currentTime - 15;
+            j++;
+            if (j === 5) {
+                endGame();
+            } else {
+            renderQuestions();   
+            }  
         }
-        j++;
-        renderQuestions();
-        return;
     })
 }
 
-function destroyQuestions () {
-    mainSectionContainer.innerHTML = "";
-    renderQuestions();
+function endGame() {
+    if (currentTime > 0) {
+        score = currentTime
+        bigMainContainer.textContent = "Congratulations! Your scored " + score + " !";
+        smallMainContainer.textContent = "Enter your initials!"
+        smallMainContainer.appendChild(multiButtonElement);
+    }
+    if (currentTime === 0) {
+        bigMainContainer.textContent = "Better luck next time!"
+        smallMainContainer.textContent = ""
+    }
 }
 
 function startGame () {
