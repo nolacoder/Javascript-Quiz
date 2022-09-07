@@ -1,4 +1,41 @@
 :root {
     box-sizing: border-box;
+    font-size: 25px;
 }
 
+.highscore-cont {
+    display: inline;
+}
+
+.highscore-cont a {
+    text-decoration: none;
+    padding: 0% 0% 0% 2%;
+}
+
+.timer-cont {
+    display: inline;
+    float: right;
+    padding: 0% 2% 0% 0%;
+}
+
+.main-section {
+    text-align: center;
+    height: 35em;
+}
+
+.big-main {
+    height: 25%;
+    padding-top: 15%;
+    font-size: 175%;
+}
+
+.small-main {
+    padding: 0 10%;
+}
+
+.multi-button {
+    font-size: 100%;
+    margin-top: 3%;
+    padding: 1%;
+    border: 2px solid;
+}

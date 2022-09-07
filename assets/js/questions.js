@@ -1,0 +1,42 @@
+var questions = [
+    {
+        question: "B is the correct answer",
+        firstAnswer: "First answer is the wrong answer",
+        secondAnswer: "Second answer is the correct answer",
+        thirdAnswer: "Third answer is the wrong answer",
+        fourthAnswer: "Fourth answer is the wrong answer",
+        correctAnswer: "1",
+    },
+    {
+        question: "A is the correct answer",
+        firstAnswer: "First answer is the correct answer",
+        secondAnswer: "Second answer is the wrong answer",
+        thirdAnswer: "Third answer is the wrong answer",
+        fourthAnswer: "Fourth answer is the wrong answer",
+        correctAnswer: "0",
+    },
+    {
+        question: "D is the correct answer",
+        firstAnswer: "First answer is the wrong answer",
+        secondAnswer: "Second answer is the wrong answer",
+        thirdAnswer: "Third answer is the wrong answer",
+        fourthAnswer: "Fourth answer is the correct answer",
+        correctAnswer: "3",
+    },
+    {
+        question: "B is the correct answer",
+        firstAnswer: "First answer is the wrong answer",
+        secondAnswer: "Second answer is the correct answer",
+        thirdAnswer: "Third answer is the wrong answer",
+        fourthAnswer: "Fourth answer is the wrong answer",
+        correctAnswer: "1",
+    },
+    {
+        question: "C is the correct answer",
+        firstAnswer: "First answer is the wrong answer",
+        secondAnswer: "Second answer is the wrong answer",
+        thirdAnswer: "Third answer is the correct answer",
+        fourthAnswer: "Fourth answer is the wrong answer",
+        correctAnswer: "2",
+    },
+]

@@ -12,31 +12,21 @@
         <a href="">View Highscores</a>
     </section>
 
-    <section id="timer">
-        Time: <span id="time">0</span>
+    <section class="timer-cont">
+        Time: <span id="timer">0</span>
     </section>
 
-    <section>
-        <section>
-            <h1>Coding Quiz Challenge</h1>
-            <p>
-                Test your knowledge of world soccer clubs! Complete all questions before the timer hits 0 to win! Wrong answers take 15 seonds off of the timer.
-            </p>
-            <button id="start">Start!</button>
-        </section>
+    <section class="main-section" id="main-section">
+        <section class="big-main" id="big-main">
 
-        <section id="questions" class="hide">
-            <h2>Nice job!</h2>
-            <p>Your final score is <span id="score"></span>.</p>
-            <p>
-                Enter your initials: <input type="text" id="initials">
-            </p>
         </section>
+        <section class="small-main" id="small-main">
 
-        <section id="feedback"></section>
+        </section>
+        <button class="multi-button" id="multi-button" data-start="Start!" data-submit="Submit" data-state="start">Start!</button>
     </section>
     
-    <script></script>
-    <script></script>
+    <script src="./assets/js/questions.js"> </script>
+    <script src="./assets/js/game.js"></script>
 </body>
 </html>
